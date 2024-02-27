@@ -27,26 +27,41 @@ entity* create_player(position startpos)
 /* Manejar las entradas del teclado */
 void handle_input(char in)
 {
+  /* Nueva posición */
+  position newpos = (*player).pos;
+
   switch (in)
   {
     /* Moverse hacia arriba */
     case 'k':
-      (*player).pos.y--;
+      newpos.y--;
       break;
     /* Moverse hacia abajo */
     case 'j':
-      (*player).pos.y++;
+      newpos.y++;
       break;
     /* Moverse hacia izquierda */
     case 'h':
-      (*player).pos.x--;
+      newpos.x--;
       break;
     /* Moverse hacia derecha */
     case 'l':
-      (*player).pos.x++;
+      newpos.x++;
       break;
 
     default:
       break;
+  }
+
+  move_player(newpos);
+}
+
+/* Mover al jugador si es posible */
+void move_player(position npos)
+{
+  if (map[npos.y][npos.x].walkable)
+  {
+    (*player).pos.y = npos.y;
+    (*player).pos.x = npos.x;
   }
 }
