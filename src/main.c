@@ -1,53 +1,56 @@
-// Importar curses (ncurses -> ncurses.h / pdcurses -> curses.h)
+/* Importar curses (ncurses -> ncurses.h / pdcurses -> curses.h) */
 #include <game.h>
 
 entity* player;
 
 int main()
 {
-  // Inicializar ventana
+  /* Inicializar ventana */
   initscr();
 
-  // No imprimir los caracteres que se escriben
+  /* No imprimir los caracteres que se escriben */
   noecho();
 
-  // Cambia la visibilidad del cursor
-  // 0 -> invisible
-  // 1 -> subrayado
-  // 2 -> bloque
+  /* Cambia la visibilidad del cursor
+   * 0 -> invisible
+   * 1 -> subrayado
+   * 2 -> bloque */
   curs_set(0);
 
-  // Almacenar caracter leido
+  /* Almacenar caracter leido */
   char ch;
-  // Posición inicial, **(y, x)**
+  /* Posición inicial, **(y, x)** */
   position startpos = { 10, 20 };
-  // Crear al jugador principal
+  /* Crear al jugador principal */
   player = create_player(startpos);
-  // Escribir el caracter del jugador principal
+  /* Escribir el caracter del jugador principal */
   mvaddch((*player).pos.y, (*player).pos.x, (*player).ch);
 
-  // Ciclo principal
+  /* Ciclo principal */
   while (1)
   {
-    // Obtener caracter
+    /* Obtener caracter */
     ch = getch();
-    // Salir del ciclo si se presiona 'q'
+    /* Salir del ciclo si se presiona 'q' */
     if (ch == 'q')
     {
       break;
     }
 
-    // Manejar el caracter introducido
+    /* Manejar el caracter introducido */
     handle_input(ch);
 
-    // Limpiar pantalla
+    /* Limpiar pantalla */
     clear();
-    // Dibujar nuevamente el caracter del jugador en (y, x)
+    /* Dibujar nuevamente el caracter del jugador en (y, x) */
     mvaddch((*player).pos.y, (*player).pos.x, (*player).ch);
   }
 
-  // Cerrar la ventana
+  /* Cerrar la ventana */
   endwin();
+
+  /* Nótese que podemos usar printf sin importar stdio ya que posiblemente curses la importa, por lo que ya estaría importada */
+  printf("Goodbye");
 
   return 0;
 }
