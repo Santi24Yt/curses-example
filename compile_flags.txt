@@ -1,2 +1,5 @@
 -lcurses
 -I./include/
+-Wall
+-Wextra
+-Werror
