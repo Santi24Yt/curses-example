@@ -6,6 +6,7 @@
 #include <curses.h>
 #include <stdlib.h>
 
+/* Usamos typedef para no tener que poner struct cada que queremos referenciar, puede ser mala práctica */
 /* Define la posición de algo */
 typedef struct
 {
