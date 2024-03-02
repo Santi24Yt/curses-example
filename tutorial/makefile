@@ -29,7 +29,7 @@ compiledev:
 
 # Ejecutar el programa
 run:
-	./bin/game
+	$(BINS)/game
 
 # Limpiar la version anterior aunque no exista
 clean:
