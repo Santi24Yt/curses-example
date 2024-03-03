@@ -9,6 +9,8 @@ int main()
   raw();
   noecho();
   keypad(stdscr, TRUE);
+
+  nodelay(stdscr, TRUE);
   
   mmask_t old;
   mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, &old);
@@ -48,7 +50,11 @@ int main()
 
   while (ch != 'q')
   {
-    ch = getch();
+    int nch = getch();
+    if (nch >= 0)
+    {
+      ch = nch;
+    }
 
     move(0, 0);
     clrtoeol();
