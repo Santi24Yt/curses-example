@@ -1,4 +1,4 @@
-/* gcc spawnwins.c -lcurses -std=c89 -o ./bin/<n> */
+/* gcc newwins.c -lcurses -std=c89 -o ./bin/<n> */
 #include <curses.h>
 
 
