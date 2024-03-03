@@ -37,6 +37,8 @@ position map1()
   /* Cuartos */
   room* rooms = calloc(n, sizeof(room));
 
+  /* fprintf(stderr, "Generating rooms\n"); */
+
   int i;
   for (i = 0; i < n; i++)
   {
@@ -52,7 +54,8 @@ position map1()
     /* Conectar los cuartos */
     if (i > 0)
     {
-      connectrooms(rooms[i-1], rooms[i]);
+      diagonalconnectrooms(rooms[i-1], rooms[i]);
+      /* fprintf(stderr, "%d\n", i); */
     }
   }
 
