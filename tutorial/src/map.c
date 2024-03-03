@@ -48,6 +48,12 @@ position map1()
 
     rooms[i] = newroom(y, x, h, w);
     addroom_tomap(rooms[i]);
+
+    /* Conectar los cuartos */
+    if (i > 0)
+    {
+      connectrooms(rooms[i-1], rooms[i]);
+    }
   }
 
   /* Posicion inicial del jugador en este mapa */

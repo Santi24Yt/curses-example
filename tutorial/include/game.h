@@ -63,6 +63,7 @@ void freemap();
 /* Definir la firma de las funciones de room.c */
 room newroom(int y, int x, int height, int width);
 void addroom_tomap(room room);
+void connectrooms(room room1, room room2);
 
 /* Variables externas / globales */
 /* Incluir a la variable que va a ser el jugador principal
