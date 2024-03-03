@@ -11,6 +11,9 @@ int main()
 {
   setup();
 
+  /* Semilla aleatoria */
+  srand(time(NULL));
+
   /* Posición inicial, **(y, x)** */
   position startpos;
   /* Crear el mapa */

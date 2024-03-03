@@ -5,6 +5,7 @@
 
 #include <curses.h>
 #include <stdlib.h>
+#include <time.h>
 
 /* Usamos typedef para no tener que poner struct cada que queremos referenciar, puede ser mala práctica */
 /* Define la posición de algo */
@@ -29,6 +30,15 @@ typedef struct
   bool walkable;
 } tile;
 
+/* Cuartos */
+typedef struct
+{
+  int height;
+  int width;
+  position pos;
+  position center;
+} room;
+
 
 /* Definir la firma de las funciones de engine.c */
 void setup();
@@ -49,6 +59,10 @@ void draw();
 tile** create_maptiles();
 position map1();
 void freemap();
+
+/* Definir la firma de las funciones de room.c */
+room newroom(int y, int x, int height, int width);
+void addroom_tomap(room room);
 
 /* Variables externas / globales */
 /* Incluir a la variable que va a ser el jugador principal

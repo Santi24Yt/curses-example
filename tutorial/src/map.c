@@ -25,19 +25,36 @@ tile** create_maptiles()
 /* Un mapa con espacio para moverse */
 position map1()
 {
+  /* Propiedades de los cuartos */
   int y;
   int x;
-  /* Posicion inicial del jugador en este mapa */
-  position start_pos = { 10, 50 };
+  int h;
+  int w;
 
-  for (y = 5; y < 15; y++)
+  /* Número de cuartos */
+  int n = (rand() % 11) + 5;
+
+  /* Cuartos */
+  room* rooms = calloc(n, sizeof(room));
+
+  int i;
+  for (i = 0; i < n; i++)
   {
-    for (x = 40; x < 60; x++)
-    {
-      map[y][x].ch = '.';
-      map[y][x].walkable = true;
-    }
+    /* Generar los parámetros aleatoriamente */
+    y = (rand() % (MAP1_HEIGHT - 10)) + 1;
+    x = (rand() % (MAP1_WIDTH - 30)) + 1;
+    h = (rand() % 7) + 3;
+    w = (rand() % 15) + 10;
+
+    rooms[i] = newroom(y, x, h, w);
+    addroom_tomap(rooms[i]);
   }
+
+  /* Posicion inicial del jugador en este mapa */
+  position start_pos = { rooms[0].center.y, rooms[0].center.x };
+
+  /* Liberar la memoria ya que ya fueron dibujadas */
+  free(rooms);
 
   return start_pos;
 }
