@@ -19,9 +19,10 @@ room newroom(int y, int x, int h, int w)
 void addroom_tomap(room r)
 {
   int y;
+  int x;
+
   for (y = r.pos.y; y < r.pos.y + r.height; y++)
   {
-    int x;
     for (x = r.pos.x; x < r.pos.x + r.width; x++)
     {
       map[y][x].ch = '.';

@@ -17,7 +17,7 @@ void setup()
   /* Inicializar colores o salir si no están disponibles */
   if (has_colors() == FALSE)
   {
-    endwin();
+    close();
     printf("Colors are not supported by your terminal\n");
     exit(1);
   }
@@ -63,6 +63,7 @@ void close()
 
   /* Liberar la memoria alocada dinámicamente */
   free(player);
+  freemap();
 
   /* Nótese que podemos usar printf sin importar stdio ya que posiblemente curses la importa, por lo que ya estaría importada */
   printf("Goodbye\n");

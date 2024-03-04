@@ -28,7 +28,7 @@ typedef struct
   int color;
 } entity;
 
-/* Un tile, puede ser suelo o no */
+/* Un tile, puede ser suelo o no, puede seer visible o haber sido visitado */
 typedef struct
 {
   char ch;
@@ -74,7 +74,7 @@ void freemap();
 room newroom(int y, int x, int height, int width);
 void addroom_tomap(room room);
 void connectrooms(room room1, room room2);
-void diagonalconnectrooms(room r1, room r2);
+void diagonalconnectrooms(room room1, room room2);
 
 /* Definir la firma de las funciones de fov.c */
 void makefov(entity* pplayer);
@@ -82,7 +82,7 @@ void clearfov(entity* pplayer);
 int getdis(position origin, position target);
 bool isinmap(int y, int x);
 bool lineofsight(position origin, position target);
-int getsign(int a);
+int getsign(int n);
 
 /* Variables externas / globales */
 /* Incluir a la variable que va a ser el jugador principal

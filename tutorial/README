@@ -2,5 +2,14 @@ Curses (ncurses/pdcurses) game made following this tutorial
 
 https://dev.to/ignaoya/series/13852
 
-Compile with
+Compile and run with
 $ make
+
+Compile
+$ make dev
+
+Run
+$ make run
+
+
+(for more things read makefile)

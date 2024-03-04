@@ -3,15 +3,31 @@
 /* Funcion para alocar los tiles del mapa */
 tile** create_maptiles()
 {
-  int y = 0;
-  int x = 0;
   /* Alocar la memoria para las columnas del mapa */
   tile** tiles = calloc(MAP1_HEIGHT, sizeof(tile*));
+
+  if (tiles == NULL)
+  {
+    close();
+    fprintf(stderr, "Out of memory\n");
+    exit(1);
+  }
+
+  int y;
+  int x;
 
   for (y = 0; y < MAP1_HEIGHT; y++)
   {
     /* Alocar la memoria para los tiles del mapa */
     tiles[y] = calloc(MAP1_WIDTH, sizeof(tile));
+
+    if (tiles[y] == NULL)
+    {
+      close();
+      fprintf(stderr, "Out of memory\n");
+      exit(1);
+    }
+
     for (x = 0; x < MAP1_WIDTH; x++)
     {
       tiles[y][x].ch = '#';
@@ -40,6 +56,13 @@ position map1()
 
   /* Cuartos */
   room* rooms = calloc(n, sizeof(room));
+
+  if (rooms == NULL)
+  {
+    close();
+    fprintf(stderr, "Out of memory\n");
+    exit(1);
+  }
 
   /* fprintf(stderr, "Generating rooms\n"); */
 
@@ -73,7 +96,7 @@ position map1()
 }
 
 /* Liberar la memoria alocada dinámicamente para el mapa */
-void freeMap()
+void freemap()
 {
   int y;
 

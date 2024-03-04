@@ -27,9 +27,10 @@ void draw_map()
 }
 
 /* Dibujar entidad */
-void draw_ent(entity* ent)
+void draw_ent(entity* pent)
 {
-  mvaddch((*ent).pos.y, (*ent).pos.x, (*ent).ch | (*ent).color);
+  entity ent = *pent;
+  mvaddch(ent.pos.y, ent.pos.x, ent.ch | ent.color);
 }
 
 /* Dibujar todo */

@@ -5,24 +5,28 @@ entity* create_player(position startpos)
 {
   /* Alocar espacio en memoria para una nueva entidad
    * No es necesario usar calloc ya que vamos a asignar inmediatamente la memoria */
-  entity* new_player = malloc(sizeof(entity));
+  entity* pnew_player = malloc(sizeof(entity));
 
   /* Error si ya no hay memoria */
-  if (new_player == NULL)
+  if (pnew_player == NULL)
   {
-    printf("Out of memory");
-    exit(0);
+    close();
+    fprintf(stderr, "Out of memory\n");
+    exit(1);
   }
+
+  entity player = *pnew_player;
 
   /* Asignar la posición del jugador y su caracter
    * a -> b es equivalente a (*a).b */
-  (*new_player).pos.x = startpos.x;
-  (*new_player).pos.y = startpos.y;
-  (*new_player).ch = '@';
-  (*new_player).color = COLOR_PAIR(VISIBLE_COLOR);
+  player.pos.x = startpos.x;
+  player.pos.y = startpos.y;
+  player.ch = '@';
+  player.color = COLOR_PAIR(VISIBLE_COLOR);
 
+  (*pnew_player) = player;
   /* Devolver el jugador (su puntero en realidad) */
-  return new_player;
+  return pnew_player;
 }
 
 /* Manejar las entradas del teclado */

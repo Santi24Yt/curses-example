@@ -13,23 +13,22 @@ void makefov(entity* pplayer)
   map[playpos.y][playpos.x].seen = true;
 
   int y;
+  int x;
+
   for (y = playpos.y - radius; y < playpos.y + radius; y++)
   {
-    int x;
     for (x = playpos.x - radius; x < playpos.x + radius; x++)
     {
       target.y = y;
       target.x = x;
       distance = getdis(playpos, target);
 
-      if (distance < radius)
+      if (distance < radius && isinmap(y, x) && lineofsight(playpos, target))
       { 
-        if (isinmap(y, x) && lineofsight(playpos, target))
-        { 
-          map[y][x].visible = true;
-          map[y][x].seen = true;
-        } 
-      }
+        map[y][x].visible = true;
+        map[y][x].seen = true;
+      } 
+
     }
   }
 }
@@ -42,13 +41,16 @@ void clearfov(entity* pplayer)
   position playpos = (*pplayer).pos;
 
   int y;
+  int x;
+
   for (y = playpos.y - radius; y < playpos.y + radius; y++)
   { 
-    int x;
     for (x = playpos.x - radius; x < playpos.x + radius; x++)
     {
       if (isinmap(y, x))
+      {
         map[y][x].visible = false;
+      }
     }
   } 
 }
@@ -56,8 +58,8 @@ void clearfov(entity* pplayer)
 /* obtener distancia */
 int getdis(position origin, position target)
 { 
-  double dy;
-  double dx;
+  float dy;
+  float dx;
   int distance;
 
   dx = target.x - origin.x;
@@ -141,7 +143,7 @@ bool lineofsight(position origin, position target)
   }
 }
 
-int getsign(int a)
+int getsign(int n)
 {
-  return (a < 0) ? -1 : 1;
+  return (n < 0) ? -1 : 1;
 }
