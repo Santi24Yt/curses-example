@@ -26,6 +26,7 @@ void addroom_tomap(room r)
     {
       map[y][x].ch = '.';
       map[y][x].walkable = true;
+      map[y][x].transparent = true;
     }
   }
 }
@@ -51,17 +52,20 @@ void connectrooms(room r1, room r2)
 
     map[c1.y][c1.x].ch = '.';
     map[c1.y][c1.x].walkable = true;
+    map[c1.y][c1.x].transparent = true;
 
     /* Hacerlos más anchos si es posible */
     if (c1.y - 1 > 0)
     {
       map[c1.y - 1][c1.x].ch = '.';
       map[c1.y - 1][c1.x].walkable = true;
+      map[c1.y - 1][c1.x].transparent = true;
     }
     if (c1.x - 1 > 0)
     {
       map[c1.y][c1.x - 1].ch = '.';
       map[c1.y][c1.x - 1].walkable = true;
+      map[c1.y][c1.x - 1].transparent = true;
     }
 
   }
@@ -117,17 +121,20 @@ void diagonalconnectrooms(room r1, room r2)
 
     map[y][x].ch = '.';
     map[y][x].walkable = true;
+    map[y][x].transparent = true;
 
     if (y - 1 > 0)
     {
       map[y-1][x].ch = '.';
       map[y-1][x].walkable = true;
+      map[y-1][x].transparent = true;
     }
 
     if (x - 1 > 0)
     {
       map[y][x-1].ch = '.';
       map[y][x-1].walkable = true;
+      map[y][x-1].transparent = true;
     }
 
 
@@ -138,17 +145,20 @@ void diagonalconnectrooms(room r1, room r2)
       {
         map[y][j].ch = '.';
         map[y][j].walkable = true;
+        map[y][j].transparent = true;
 
         if (y - 1 > 0)
         {
           map[y-1][x].ch = '.';
           map[y-1][x].walkable = true;
+          map[y-1][x].transparent = true;
         }
 
         if (x - 1 > 0)
         {
           map[y][x-1].ch = '.';
           map[y][x-1].walkable = true;
+          map[y][x-1].transparent = true;
         }
       }
     }
@@ -160,17 +170,20 @@ void diagonalconnectrooms(room r1, room r2)
       {
         map[j][x].ch = '.';
         map[j][x].walkable = true;
+        map[j][x].transparent = true;
 
         if (y - 1 > 0)
         {
           map[y-1][x].ch = '.';
           map[y-1][x].walkable = true;
+          map[y-1][x].transparent = true;
         }
 
         if (x - 1 > 0)
         {
           map[y][x-1].ch = '.';
           map[y][x-1].walkable = true;
+          map[y][x-1].transparent = true;
         }
       }
     }
@@ -182,17 +195,20 @@ void diagonalconnectrooms(room r1, room r2)
       {
         map[j][x].ch = '.';
         map[j][x].walkable = true;
+        map[j][x].transparent = true;
 
         if (y - 1 > 0)
         {
           map[y-1][x].ch = '.';
           map[y-1][x].walkable = true;
+          map[y-1][x].transparent = true;
         }
 
         if (x - 1 > 0)
         {
           map[y][x-1].ch = '.';
           map[y][x-1].walkable = true;
+          map[y][x-1].transparent = true;
         }
       }
     }

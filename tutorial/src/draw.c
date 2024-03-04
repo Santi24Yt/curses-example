@@ -10,7 +10,18 @@ void draw_map()
   {
     for (x = 0; x < MAP1_WIDTH; x++)
     {
-      mvaddch(y, x, map[y][x].ch);
+      if (map[y][x].visible)
+      {
+        mvaddch(y, x, map[y][x].ch | map[y][x].color);
+      }
+      else if (map[y][x].seen)
+      {
+        mvaddch(y, x, map[y][x].ch | COLOR_PAIR(SEEN_COLOR));
+      }
+      else
+      {
+        mvaddch(y, x, ' ');
+      }
     }
   }
 }
@@ -18,7 +29,7 @@ void draw_map()
 /* Dibujar entidad */
 void draw_ent(entity* ent)
 {
-  mvaddch((*ent).pos.y, (*ent).pos.x, (*ent).ch);
+  mvaddch((*ent).pos.y, (*ent).pos.x, (*ent).ch | (*ent).color);
 }
 
 /* Dibujar todo */

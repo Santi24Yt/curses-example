@@ -13,12 +13,27 @@ void setup()
    * 1 -> subrayado
    * 2 -> bloque */
   curs_set(0);
+
+  /* Inicializar colores o salir si no están disponibles */
+  if (has_colors() == FALSE)
+  {
+    endwin();
+    printf("Colors are not supported by your terminal\n");
+    exit(1);
+  }
+
+  start_color();
+
+  init_pair(VISIBLE_COLOR, COLOR_WHITE, COLOR_BLACK);
+  init_pair(SEEN_COLOR, COLOR_BLUE, COLOR_BLACK);
 }
 
 void loop()
 {
   /* Almacenar caracter leido */
   char ch;
+  /* Crear fov */
+  makefov(player);
   /* Dibujar los caracteres */
   draw();
 

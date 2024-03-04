@@ -19,6 +19,7 @@ entity* create_player(position startpos)
   (*new_player).pos.x = startpos.x;
   (*new_player).pos.y = startpos.y;
   (*new_player).ch = '@';
+  (*new_player).color = COLOR_PAIR(VISIBLE_COLOR);
 
   /* Devolver el jugador (su puntero en realidad) */
   return new_player;
@@ -61,7 +62,9 @@ void move_player(position npos)
 {
   if (map[npos.y][npos.x].walkable)
   {
+    clearfov(player);
     (*player).pos.y = npos.y;
     (*player).pos.x = npos.x;
+    makefov(player);
   }
 }

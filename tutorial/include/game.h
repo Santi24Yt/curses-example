@@ -6,6 +6,11 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+
+/* Identificador de colores */
+#define VISIBLE_COLOR 1
+#define SEEN_COLOR 2
 
 /* Usamos typedef para no tener que poner struct cada que queremos referenciar, puede ser mala práctica */
 /* Define la posición de algo */
@@ -20,14 +25,19 @@ typedef struct
 {
   position pos;
   char ch;
+  int color;
 } entity;
 
 /* Un tile, puede ser suelo o no */
 typedef struct
 {
   char ch;
+  int color;
   /* stdbool posiblemente viene incluido en curses */
   bool walkable;
+  bool transparent;
+  bool visible;
+  bool seen;
 } tile;
 
 /* Cuartos */
@@ -65,6 +75,14 @@ room newroom(int y, int x, int height, int width);
 void addroom_tomap(room room);
 void connectrooms(room room1, room room2);
 void diagonalconnectrooms(room r1, room r2);
+
+/* Definir la firma de las funciones de fov.c */
+void makefov(entity* pplayer);
+void clearfov(entity* pplayer);
+int getdis(position origin, position target);
+bool isinmap(int y, int x);
+bool lineofsight(position origin, position target);
+int getsign(int a);
 
 /* Variables externas / globales */
 /* Incluir a la variable que va a ser el jugador principal
