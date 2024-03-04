@@ -9,6 +9,9 @@ tile** map;
 
 int main()
 {
+  /* Debug log */
+  fprintf(stderr, "Starting at %ld", time(NULL));
+
   setup();
 
   /* Semilla aleatoria */

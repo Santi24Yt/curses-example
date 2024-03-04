@@ -37,7 +37,7 @@ compiledev:
 
 # Ejecutar el programa
 run:
-	$(BINS)/game
+	FILE="$(DEBUGS)/$(shell date +%s)-debug.log"; $(BINS)/game 2> $$FILE
 
 # Limpiar la version anterior y el debug aunque no existan
 clean:
