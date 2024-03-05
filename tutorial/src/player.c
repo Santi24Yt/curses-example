@@ -5,27 +5,27 @@ entity* create_player(position startpos)
 {
   /* Alocar espacio en memoria para una nueva entidad
    * No es necesario usar calloc ya que vamos a asignar inmediatamente la memoria */
+  debug3("Allocate meory for player");
   entity* pnew_player = malloc(sizeof(entity));
 
   /* Error si ya no hay memoria */
   if (pnew_player == NULL)
   {
+    debug3("Out of memory for player");
     close();
-    fprintf(stderr, "Out of memory\n");
+    printf("Out of memory\n");
     exit(1);
   }
 
-  entity player = *pnew_player;
-
   /* Asignar la posición del jugador y su caracter
    * a -> b es equivalente a (*a).b */
-  player.pos.x = startpos.x;
-  player.pos.y = startpos.y;
-  player.ch = '@';
-  player.color = COLOR_PAIR(VISIBLE_COLOR);
+  (*pnew_player).pos.x = startpos.x;
+  (*pnew_player).pos.y = startpos.y;
+  (*pnew_player).ch = '@';
+  (*pnew_player).color = COLOR_PAIR(VISIBLE_COLOR);
 
-  (*pnew_player) = player;
   /* Devolver el jugador (su puntero en realidad) */
+  debug2("New player created");
   return pnew_player;
 }
 
@@ -66,6 +66,7 @@ void move_player(position npos)
 {
   if (map[npos.y][npos.x].walkable)
   {
+    debug3("Moving player to y: %d, x: %d", npos.y, npos.x);
     clearfov(player);
     (*player).pos.y = npos.y;
     (*player).pos.x = npos.x;

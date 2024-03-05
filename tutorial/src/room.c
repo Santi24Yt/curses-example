@@ -12,6 +12,8 @@ room newroom(int y, int x, int h, int w)
   nroom.center.y = y + h/2;
   nroom.center.x = x + w/2;
 
+  debug3("Room generated (y: %d, x: %d, h: %d, w: %d, cy: %d, cx: %d)", y, x, h, w, nroom.center.y, nroom.center.x);
+
   return nroom;
 }
 
@@ -70,11 +72,14 @@ void connectrooms(room r1, room r2)
     }
 
   }
+
+  debug3("Connected");
 }
 
 /* Generar caminos diagonales si es posible */
 void diagonalconnectrooms(room r1, room r2)
 {
+  debug3("Trying to connect rooms diagonaly");
   position c1 = r1.center;
   position c2 = r2.center;
 
@@ -98,16 +103,15 @@ void diagonalconnectrooms(room r1, room r2)
 
   if (x2 - x1 == 0)
   {
+    debug3("Failed, connecting with straights");
     connectrooms(r1, r2);
-    /* fprintf(stderr, "No diagnoal\n"); */
     return;
   }
 
   float m = (float)(y2 - y1)/(float)(x2 - x1);
   float b = (float)y2 - m*(float)x2;
 
-  /* fprintf(stderr, "(x1: %d, y1: %d)\n", x1, y1);
-  fprintf(stderr, "(x2: %d, y2: %d)\n", x2, y2); */
+  debug3("Diagonal y = %fx + %f", m, b);
 
   int prevx = x1;
   int prevy = y1;
@@ -217,4 +221,5 @@ void diagonalconnectrooms(room r1, room r2)
     prevx = x;
     prevy = y;
   }
+  debug3("Connected");
 }

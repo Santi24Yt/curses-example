@@ -36,7 +36,10 @@ void draw_ent(entity* pent)
 /* Dibujar todo */
 void draw()
 {
+  debug3("Clearing screen");
   clear();
+  debug2("Drawing map");
   draw_map();
+  debug2("Drawing player");
   draw_ent(player);
 }

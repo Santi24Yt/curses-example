@@ -8,6 +8,8 @@
 #include <time.h>
 #include <math.h>
 
+#define DEBUG_LEVEL 3
+
 /* Identificador de colores */
 #define VISIBLE_COLOR 1
 #define SEEN_COLOR 2
@@ -93,6 +95,28 @@ extern const int MAP1_HEIGHT;
 extern const int MAP1_WIDTH;
 /* Un puntero de punteros que incluya los tiles del mapa, aka. un arreglo de arreglos de tile */
 extern tile** map;
+
+#ifndef DEBUG_LEVEL
+  #define DEBUG_LEVEL 1
+#endif
+
+/* Debug macro */
+#define debug1(fmt, ...)  { \
+  time_t timestamp = time(NULL); \
+  struct tm *tmp; \
+  char times[30]; \
+  tmp = localtime(&timestamp); \
+  strftime(times, sizeof(times), "%x - %H:%M:%S", tmp); \
+  fprintf(stderr, "[%s] %s:%d: " fmt "\n", times, __FILE__, __LINE__, ##__VA_ARGS__); \
+}
+
+#define debug2(fmt, ...) { \
+  if (DEBUG_LEVEL >= 2) { debug1(fmt, ##__VA_ARGS__); } \
+}
+
+#define debug3(fmt, ...) { \
+  if (DEBUG_LEVEL >= 3) { debug1(fmt, ##__VA_ARGS__); } \
+}
 
 /* Acaba el if que checa si ya fue compilado */
 #endif

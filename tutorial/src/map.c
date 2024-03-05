@@ -3,13 +3,15 @@
 /* Funcion para alocar los tiles del mapa */
 tile** create_maptiles()
 {
+  debug3("Allocating memory for tiles");
   /* Alocar la memoria para las columnas del mapa */
   tile** tiles = calloc(MAP1_HEIGHT, sizeof(tile*));
 
   if (tiles == NULL)
   {
+    debug3("Out of memory for tiles");
     close();
-    fprintf(stderr, "Out of memory\n");
+    printf("Out of memory\n");
     exit(1);
   }
 
@@ -23,8 +25,9 @@ tile** create_maptiles()
 
     if (tiles[y] == NULL)
     {
+      debug3("Out of memory for tiles");
       close();
-      fprintf(stderr, "Out of memory\n");
+      printf("Out of memory\n");
       exit(1);
     }
 
@@ -38,6 +41,8 @@ tile** create_maptiles()
       tiles[y][x].seen = false;
     }
   }
+
+  debug3("Tiles allocated");
 
   return tiles;
 }
@@ -55,17 +60,20 @@ position map1()
   int n = (rand() % 11) + 5;
 
   /* Cuartos */
+  debug3("Allocating memory for rooms");
   room* rooms = calloc(n, sizeof(room));
 
   if (rooms == NULL)
   {
+    debug3("Out of memory for rooms");
     close();
-    fprintf(stderr, "Out of memory\n");
+    printf("Out of memory\n");
     exit(1);
   }
 
   /* fprintf(stderr, "Generating rooms\n"); */
 
+  debug2("Generating rooms");
   int i;
   for (i = 0; i < n; i++)
   {
@@ -75,22 +83,28 @@ position map1()
     h = (rand() % 7) + 3;
     w = (rand() % 15) + 10;
 
+    debug3("Generating room %d", i+1);
+
     rooms[i] = newroom(y, x, h, w);
+    debug3("Adding room to map");
     addroom_tomap(rooms[i]);
 
     /* Conectar los cuartos */
     if (i > 0)
     {
+      debug3("Connecting room%d and room%d", i, i+1);
       diagonalconnectrooms(rooms[i-1], rooms[i]);
-      /* fprintf(stderr, "%d\n", i); */
     }
   }
 
   /* Posicion inicial del jugador en este mapa */
   position start_pos = { rooms[0].center.y, rooms[0].center.x };
+  debug2("Player startpos y: %d, x: %d", start_pos.y, start_pos.x);
 
   /* Liberar la memoria ya que ya fueron dibujadas */
   free(rooms);
+  debug3("Room memory freed");
+  debug2("map1 created");
 
   return start_pos;
 }
